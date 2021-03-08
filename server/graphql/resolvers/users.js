@@ -6,11 +6,6 @@ const { generateToken } = require("../../util/common");
 const User = require("../../models/User");
 
 module.exports = {
-  Query: {
-    sayHi() {
-      return "Hello World";
-    }
-  },
   Mutation: {
     async register(_, { registerInput: { username, email, password, confirmPassword } }) {
       const { valid, errors } = validateRegisterInput(username, email, password, confirmPassword);
