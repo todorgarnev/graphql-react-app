@@ -1,0 +1,36 @@
+.menu {
+  margin-bottom: 3rem;
+  width: 100%;
+  height: auto;
+  background-color: rebeccapurple;
+
+  .listItems {
+    padding: 0 1rem;
+    display: flex;
+    font-size: 1.6rem;
+
+    li {
+      padding: 1rem;
+
+      &:first-child {
+        margin-right: auto;
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      a {
+        color: #eee;
+
+        &:hover {
+          color: black;
+        }
+
+        &.active {
+          color: black;
+        }
+      }
+    }
+  }
+}
