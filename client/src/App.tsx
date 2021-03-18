@@ -8,6 +8,10 @@ import {
   ApolloLink,
   NormalizedCacheObject
 } from "@apollo/client";
+import Home from './pages/home/Home';
+import Login from './pages/login/Login';
+import Register from './pages/register/Register';
+import Menu from './components/menu/Menu';
 
 const httpLink: ApolloLink = createHttpLink({
   uri: "http://localhost:5000"
@@ -21,6 +25,7 @@ function App() {
   return (
     <Router>
       <ApolloProvider client={client}>
+        <Menu />
         <Route exact path="/" component={Home} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />

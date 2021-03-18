@@ -1,11 +1,7 @@
 import React, { FunctionComponent } from "react";
 import styles from "./Register.module.scss";
 
-interface RegisterProps {
-  test: string;
-};
-
-const Register: FunctionComponent<RegisterProps> = () => {
+const Register: FunctionComponent = () => {
   return (
     <div>
       <h1>Register Page</h1>
