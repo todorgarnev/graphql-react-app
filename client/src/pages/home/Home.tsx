@@ -11,7 +11,7 @@ const Home: FunctionComponent = () => {
 
   return (
     <>
-    {
+      {
         loading ? <div>Loading..</div> :
           Utils.isArrayNotEmpty(posts) && posts.map((post: IPost, index: number) => (
             <div key={index}>
@@ -22,7 +22,7 @@ const Home: FunctionComponent = () => {
               <div>comments: {post.commentsCount}</div>
             </div>
           ))
-    }
+      }
     </>
   );
 }
