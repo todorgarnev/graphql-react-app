@@ -1,9 +1,8 @@
 import React, { FunctionComponent } from "react";
 import { NavLink, Redirect } from "react-router-dom";
 import styles from "./Menu.module.scss";
-
-import { ROUTES } from "../../common/constants";
-import { IRoute } from "../../common/interfaces";
+import { ROUTES } from "../../common/constants/constants";
+import { IRoute } from "../../common/interfaces/route";
 
 const Menu: FunctionComponent = () => {
   return (

@@ -4,9 +4,6 @@ export interface IPost {
   createdAt: string;
   username: string;
   likesCount: number;
-  likes: {
-    username: string;
-  };
   commentsCount: number;
   comments: {
     id: string;
