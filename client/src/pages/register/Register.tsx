@@ -2,6 +2,7 @@ import React, { FunctionComponent, FormEvent, useState, ChangeEvent } from "reac
 import { IRegisterForm } from "../../common/interfaces/register";
 import Button from "../../components/button/Button";
 import Input from "../../components/input/Input";
+import { UserPlus } from 'react-feather';
 import styles from "./Register.module.scss";
 
 const Register: FunctionComponent = () => {
@@ -58,7 +59,9 @@ const Register: FunctionComponent = () => {
                onChange={onChange}
                placeholder="confirm password" />
 
-        <Button type="submit" title="Submit" />
+        <Button type="submit" title="Submit">
+          <UserPlus />
+        </Button>
       </form>
     </div>
   );

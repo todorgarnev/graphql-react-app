@@ -6,9 +6,12 @@ interface ButtonProps {
   title: string;
 }
 
-const Button: FunctionComponent<ButtonProps> = ({ type, title }) => {
+const Button: FunctionComponent<ButtonProps> = ({ type, title, children }) => {
   return (
-    <button type={type} className={styles.button}>{title}</button>
+    <button type={type} className={styles.button}>
+      <span className={styles.icon}>{children}</span>
+      {title}
+    </button>
   )
 }
 
