@@ -1,0 +1,11 @@
+.input {
+  margin-bottom: 2rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid rebeccapurple;
+  font-size: 1.5rem;
+
+  &:focus {
+    outline: none;
+    border-width: 2px;
+  }
+}

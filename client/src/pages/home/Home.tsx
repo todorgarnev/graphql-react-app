@@ -1,10 +1,10 @@
 import React, { FunctionComponent } from "react";
 import { useQuery } from "@apollo/client";
-import styles from "./Home.module.scss";
 import { FETCH_POSTS_QUERY } from "./graphql/queries";
 import Utils from "../../common/utils/utils";
 import { IPost, IPostsData } from "../../common/interfaces/post";
 import Post from "../../components/post/Post";
+import styles from "./Home.module.scss";
 
 const Home: FunctionComponent = () => {
   const { loading, data } = useQuery<IPostsData>(FETCH_POSTS_QUERY);

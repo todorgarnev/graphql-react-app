@@ -1,0 +1,21 @@
+.button {
+  padding: 0.5rem 1rem;
+  background-color: rebeccapurple;
+  color: #eee;
+  border: none;
+  font-size: 1.8rem;
+  font-weight: 700;
+
+  &:hover {
+    cursor: pointer;
+    opacity: 0.9;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:active {
+    transform: scale(0.99);
+  }
+}

@@ -1,0 +1,15 @@
+.register {
+  margin: 0 auto;
+  width: 50vw;
+
+  .title {
+    margin-bottom: 3rem;
+    text-align: center;
+    color: rebeccapurple;
+  }
+
+  .registerForm {
+    display: flex;
+    flex-direction: column;
+  }
+}
