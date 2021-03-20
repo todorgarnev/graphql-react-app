@@ -1,7 +1,7 @@
 import React, { FunctionComponent, FormEvent, useState, ChangeEvent } from "react";
 import { useHistory } from "react-router-dom";
 import { useMutation } from "@apollo/client";
-import { LogIn, Loader } from 'react-feather';
+import { LogIn } from 'react-feather';
 import { ILogin, ILoginResponse } from "../../common/interfaces/login";
 import Button from "../../components/button/Button";
 import Input from "../../components/input/Input";
@@ -9,6 +9,7 @@ import { LOGIN_USER } from "./graphql/mutations";
 import { IServerError } from "../../common/interfaces/error";
 import Utils from "../../common/utils/utils";
 import Errors from "../../components/errors/Errors";
+import Loader from "../../components/loader/Loader";
 import styles from "./Login.module.scss";
 
 const Login: FunctionComponent = () => {
@@ -44,7 +45,7 @@ const Login: FunctionComponent = () => {
       <h1 className={styles.title}>Login</h1>
 
       {
-        loading ? <Loader className={styles.loading} /> :
+        loading ? <Loader /> :
           <form className={styles.loginForm} onSubmit={(event) => onSubmit(event)} noValidate>
             <Input type="text"
                    name="username"

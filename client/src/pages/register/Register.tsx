@@ -1,7 +1,7 @@
 import React, { FunctionComponent, FormEvent, useState, ChangeEvent } from "react";
 import { useHistory } from "react-router-dom";
 import { useMutation } from "@apollo/client";
-import { UserPlus, Loader } from 'react-feather';
+import { UserPlus } from 'react-feather';
 import { IRegister, IRegisterResponse } from "../../common/interfaces/register";
 import Button from "../../components/button/Button";
 import Input from "../../components/input/Input";
@@ -9,6 +9,7 @@ import { REGISTER_USER } from "./graphql/mutations";
 import { IServerError } from "../../common/interfaces/error";
 import Utils from "../../common/utils/utils";
 import Errors from "../../components/errors/Errors";
+import Loader from "../../components/loader/Loader";
 import styles from "./Register.module.scss";
 
 const Register: FunctionComponent = () => {
@@ -49,7 +50,7 @@ const Register: FunctionComponent = () => {
       <h1 className={styles.title}>Register</h1>
 
       {
-        loading ? <Loader className={styles.loading} /> :
+        loading ? <Loader /> :
           <form className={styles.registerForm} onSubmit={(event) => onSubmit(event)} noValidate>
             <Input type="text"
                    name="username"
