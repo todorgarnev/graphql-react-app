@@ -6,9 +6,11 @@ export interface IRegister {
 }
 
 export interface IRegisterResponse {
-  id: string;
-  email: string;
-  username: string;
-  createdAt: string;
-  token: string;
+  register: {
+    id: string;
+    email: string;
+    username: string;
+    createdAt: string;
+    token: string;
+  }
 }

@@ -1,14 +1,3 @@
-export const ROUTES = [
-  {
-    name: "Home",
-    path: "/"
-  },
-  {
-    name: "Login",
-    path: "/login"
-  },
-  {
-    name: "Register",
-    path: "/register"
-  },
-];
+import { IRoute } from "../interfaces/route";
+
+export const ROUTES: IRoute[] = [];

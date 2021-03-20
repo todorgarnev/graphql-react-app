@@ -1,21 +1,28 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useState } from "react";
 import { NavLink, Redirect } from "react-router-dom";
+import Auth from "../../common/utils/auth";
 import styles from "./Menu.module.scss";
-import { ROUTES } from "../../common/constants/constants";
-import { IRoute } from "../../common/interfaces/route";
 
 const Menu: FunctionComponent = () => {
+  const [isTokenSet, setIsTokenSet] = useState<boolean>(Auth.isTokenSet());
+
+  const logout = (): void => {
+    Auth.clearToken();
+    setIsTokenSet(false);
+  }
+
   return (
     <div className={styles.menu}>
       <ul className={styles.listItems}>
+        <li><NavLink exact to="/" activeClassName={styles.active}>Home</NavLink></li>
         {
-          ROUTES.map((route: IRoute, index: number) => (
-            <li key={index}>
-              <NavLink exact to={route.path} activeClassName={styles.active}>{route.name}</NavLink>
-            </li>
-          ))
+          isTokenSet ?
+            <li><NavLink to="/" onClick={logout}>Log out</NavLink></li> :
+            <>
+              <li><NavLink to="/login" activeClassName={styles.active}>Log in</NavLink></li>
+              <li><NavLink to="/register" activeClassName={styles.active}>Register</NavLink></li>
+            </>
         }
-        <Redirect to="/" />
       </ul>
     </div>
   );

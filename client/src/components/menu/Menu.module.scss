@@ -16,15 +16,12 @@
         margin-right: auto;
       }
 
-      &:hover {
-        cursor: pointer;
-      }
-
       a {
         color: black;
 
         &:hover {
           color: #eee;
+          cursor: pointer;
         }
 
         &.active {

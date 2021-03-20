@@ -10,6 +10,7 @@ import { IServerError } from "../../common/interfaces/error";
 import Utils from "../../common/utils/utils";
 import Errors from "../../components/errors/Errors";
 import Loader from "../../components/loader/Loader";
+import Auth from "../../common/utils/auth";
 import styles from "./Register.module.scss";
 
 const Register: FunctionComponent = () => {
@@ -22,7 +23,13 @@ const Register: FunctionComponent = () => {
     confirmPassword: ""
   });
   const [addUser, { loading }] = useMutation<IRegisterResponse, IRegister>(REGISTER_USER, {
-    update(proxy, result) {
+    update(proxy, userData) {
+      console.log(userData);
+      if (userData.data) {
+        const token: string = userData.data.register.token;
+        Auth.setToken(token);
+        history.push("/");
+      }
       history.push("/");
     },
     onError(err) {

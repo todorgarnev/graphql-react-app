@@ -10,6 +10,7 @@ import { IServerError } from "../../common/interfaces/error";
 import Utils from "../../common/utils/utils";
 import Errors from "../../components/errors/Errors";
 import Loader from "../../components/loader/Loader";
+import Auth from "../../common/utils/auth";
 import styles from "./Login.module.scss";
 
 const Login: FunctionComponent = () => {
@@ -17,8 +18,12 @@ const Login: FunctionComponent = () => {
   const [errors, setErrors] = useState<IServerError>({});
   const [formValue, setFormValue] = useState<ILogin>({ username: "", password: "" });
   const [loginUser, { loading }] = useMutation<ILoginResponse, ILogin>(LOGIN_USER, {
-    update(proxy, result) {
-      history.push("/");
+    update(proxy, userData) {
+      if (userData.data) {
+        const token: string = userData.data.login.token;
+        Auth.setToken(token);
+        history.push("/");
+      }
     },
     onError(err) {
       if (err.graphQLErrors[0].extensions) {
@@ -48,18 +53,18 @@ const Login: FunctionComponent = () => {
         loading ? <Loader /> :
           <form className={styles.loginForm} onSubmit={(event) => onSubmit(event)} noValidate>
             <Input type="text"
-                   name="username"
-                   value={formValue.username}
-                   onChange={onChange}
-                   error={Boolean(errors.username)}
-                   placeholder="username" />
+              name="username"
+              value={formValue.username}
+              onChange={onChange}
+              error={Boolean(errors.username)}
+              placeholder="username" />
             <Input type="password"
-                   name="password"
-                   autoComplete="off"
-                   value={formValue.password}
-                   onChange={onChange}
-                   error={Boolean(errors.password)}
-                   placeholder="password" />
+              name="password"
+              autoComplete="off"
+              value={formValue.password}
+              onChange={onChange}
+              error={Boolean(errors.password)}
+              placeholder="password" />
 
             <Button type="submit" title="Login">
               <LogIn />
