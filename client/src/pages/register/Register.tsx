@@ -1,27 +1,38 @@
 import React, { FunctionComponent, FormEvent, useState, ChangeEvent } from "react";
-import { IRegisterForm } from "../../common/interfaces/register";
+import { useMutation } from "@apollo/client";
+import { UserPlus, Loader } from 'react-feather';
+import { IRegister, IRegisterResponse } from "../../common/interfaces/register";
 import Button from "../../components/button/Button";
 import Input from "../../components/input/Input";
-import { UserPlus } from 'react-feather';
+import { REGISTER_USER } from "./graphql/mutations";
+import { IServerError } from "../../common/interfaces/error";
 import styles from "./Register.module.scss";
+import Utils from "../../common/utils/utils";
+import Errors from "../../components/errors/Errors";
 
 const Register: FunctionComponent = () => {
-  const [formValue, setFormValue] = useState<IRegisterForm>({
+  const [errors, setErrors] = useState<IServerError>({});
+  const [formValue, setFormValue] = useState<IRegister>({
     username: "",
     email: "",
     password: "",
     confirmPassword: ""
   });
+  const [addUser, { loading }] = useMutation<IRegisterResponse, IRegister>(REGISTER_USER, {
+    update(proxy, result) {
+      console.log("result >>", result)
+    },
+    onError(err) {
+      if (err.graphQLErrors[0].extensions) {
+        setErrors(err.graphQLErrors[0].extensions.exception.errors);
+      }
+    },
+    variables: formValue
+  });
 
   const onSubmit = (event: FormEvent): void => {
     event.preventDefault();
-    setFormValue({
-      username: "",
-      email: "",
-      password: "",
-      confirmPassword: ""
-    });
-    console.log(formValue);
+    addUser();
   }
 
   const onChange = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -35,34 +46,39 @@ const Register: FunctionComponent = () => {
     <div className={styles.register}>
       <h1 className={styles.title}>Register</h1>
 
-      <form className={styles.registerForm} onSubmit={(event) => onSubmit(event)} noValidate>
-        <Input type="text"
-               name="username"
-               value={formValue.username}
-               onChange={onChange}
-               placeholder="username" />
-        <Input type="email"
-               name="email"
-               value={formValue.email}
-               onChange={onChange}
-               placeholder="email" />
-        <Input type="password"
-               name="password"
-               autoComplete="off"
-               value={formValue.password}
-               onChange={onChange}
-               placeholder="password" />
-        <Input type="password"
-               name="confirmPassword"
-               autoComplete="off"
-               value={formValue.confirmPassword}
-               onChange={onChange}
-               placeholder="confirm password" />
+      {
+        loading ? <Loader className={styles.loading} /> :
+          <form className={styles.registerForm} onSubmit={(event) => onSubmit(event)} noValidate>
+            <Input type="text"
+                   name="username"
+                   value={formValue.username}
+                   onChange={onChange}
+                   placeholder="username" />
+            <Input type="email"
+                   name="email"
+                   value={formValue.email}
+                   onChange={onChange}
+                   placeholder="email" />
+            <Input type="password"
+                   name="password"
+                   autoComplete="off"
+                   value={formValue.password}
+                   onChange={onChange}
+                   placeholder="password" />
+            <Input type="password"
+                   name="confirmPassword"
+                   autoComplete="off"
+                   value={formValue.confirmPassword}
+                   onChange={onChange}
+                   placeholder="confirm password" />
 
-        <Button type="submit" title="Submit">
-          <UserPlus />
-        </Button>
-      </form>
+            <Button type="submit" title="Submit">
+              <UserPlus />
+            </Button>
+          </form>
+      }
+
+      { Utils.isArrayNotEmpty(Object.keys(errors)) && <Errors errors={Object.values(errors)} /> }
     </div>
   );
 }
