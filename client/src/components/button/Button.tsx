@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FunctionComponent } from "react";
+import React, { FunctionComponent } from "react";
 import styles from "./Button.module.scss";
 
 interface ButtonProps {

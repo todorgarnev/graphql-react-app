@@ -1,4 +1,5 @@
 import React, { FunctionComponent, FormEvent, useState, ChangeEvent } from "react";
+import { useHistory } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { UserPlus, Loader } from 'react-feather';
 import { IRegister, IRegisterResponse } from "../../common/interfaces/register";
@@ -6,11 +7,12 @@ import Button from "../../components/button/Button";
 import Input from "../../components/input/Input";
 import { REGISTER_USER } from "./graphql/mutations";
 import { IServerError } from "../../common/interfaces/error";
-import styles from "./Register.module.scss";
 import Utils from "../../common/utils/utils";
 import Errors from "../../components/errors/Errors";
+import styles from "./Register.module.scss";
 
 const Register: FunctionComponent = () => {
+  const history = useHistory();
   const [errors, setErrors] = useState<IServerError>({});
   const [formValue, setFormValue] = useState<IRegister>({
     username: "",
@@ -20,7 +22,7 @@ const Register: FunctionComponent = () => {
   });
   const [addUser, { loading }] = useMutation<IRegisterResponse, IRegister>(REGISTER_USER, {
     update(proxy, result) {
-      console.log("result >>", result)
+      history.push("/");
     },
     onError(err) {
       if (err.graphQLErrors[0].extensions) {
@@ -53,23 +55,27 @@ const Register: FunctionComponent = () => {
                    name="username"
                    value={formValue.username}
                    onChange={onChange}
+                   error={Boolean(errors.username)}
                    placeholder="username" />
             <Input type="email"
                    name="email"
                    value={formValue.email}
                    onChange={onChange}
+                   error={Boolean(errors.email)}
                    placeholder="email" />
             <Input type="password"
                    name="password"
                    autoComplete="off"
                    value={formValue.password}
                    onChange={onChange}
+                   error={Boolean(errors.password)}
                    placeholder="password" />
             <Input type="password"
                    name="confirmPassword"
                    autoComplete="off"
                    value={formValue.confirmPassword}
                    onChange={onChange}
+                   error={Boolean(errors.confirmPassword)}
                    placeholder="confirm password" />
 
             <Button type="submit" title="Submit">

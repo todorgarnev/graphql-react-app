@@ -1,0 +1,30 @@
+.login {
+  margin: 0 auto;
+  width: 50vw;
+
+  .title {
+    margin-bottom: 3rem;
+    text-align: center;
+    color: rebeccapurple;
+  }
+
+  .loginForm {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .loading {
+    margin: 0 auto;
+    display: block;
+    animation: loading 3s infinite;
+  }
+}
+
+@keyframes loading {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

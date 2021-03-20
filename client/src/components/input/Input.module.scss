@@ -4,6 +4,12 @@
   border: 1px solid rebeccapurple;
   font-size: 1.5rem;
 
+  &.error {
+    color: #9e646c;
+    border-color: #dcd0d1;
+    background-color: #fff7f8;
+  }
+
   &:focus {
     outline: none;
     border-width: 2px;

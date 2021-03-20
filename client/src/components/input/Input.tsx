@@ -7,6 +7,7 @@ interface InputProps {
   value: string;
   placeholder: string
   autoComplete?: string;
+  error: boolean;
   onChange: (value: ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -16,16 +17,17 @@ const Input: FunctionComponent<InputProps> = ({
   value,
   placeholder,
   autoComplete,
+  error,
   onChange
 }) => {
   return (
     <input type={type}
-      name={name}
-      value={value}
-      onChange={onChange}
-      placeholder={placeholder}
-      autoComplete={autoComplete}
-      className={styles.input} />
+           name={name}
+           value={value}
+           onChange={onChange}
+           placeholder={placeholder}
+           autoComplete={autoComplete}
+           className={`${styles.input} ${error ? styles.error : ""}`} />
   )
 }
 

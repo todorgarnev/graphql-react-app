@@ -21,14 +21,14 @@
       }
 
       a {
-        color: #eee;
+        color: black;
 
         &:hover {
-          color: black;
+          color: #eee;
         }
 
         &.active {
-          color: black;
+          color: #eee;
         }
       }
     }
