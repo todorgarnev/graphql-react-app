@@ -1,3 +1,4 @@
+import { ITokenData } from "../common/interfaces/token";
 export interface IUser {
   id: string;
   email: string;
@@ -7,5 +8,5 @@ export interface IUser {
 }
 
 export interface Store {
-  user: IUser | null;
+  user: IUser | ITokenData | null;
 }

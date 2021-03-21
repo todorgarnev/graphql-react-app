@@ -1,4 +1,5 @@
 import { createStore } from "redux";
+import Auth from "../common/utils/auth";
 import { ActionTypes, ADD_USER, REMOVE_USER } from "./actions"
 import { Store } from "./types"
 
@@ -13,6 +14,7 @@ const userReducer = (state: Store = initialStore, action: ActionTypes) => {
         user: action.payload
       };
     case REMOVE_USER:
+      Auth.clearToken();
       return {
         user: null
       };
