@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Provider } from "react-redux";
 import {
   ApolloClient,
   ApolloProvider,
@@ -8,10 +9,11 @@ import {
   ApolloLink,
   NormalizedCacheObject
 } from "@apollo/client";
+import store from "./store/store";
 import Home from './pages/home/Home';
 import Login from './pages/login/Login';
 import Register from './pages/register/Register';
-import Menu from './components/menu/Menu';
+import Navigation from './components/navigation/Navigation';
 import Container from './components/container/Container';
 
 const httpLink: ApolloLink = createHttpLink({
@@ -24,17 +26,19 @@ const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
 
 function App() {
   return (
-    <Router>
-      <ApolloProvider client={client}>
-        <Menu />
+    <Provider store={store}>
+      <Router>
+        <ApolloProvider client={client}>
+          <Navigation />
 
-        <Container>
-          <Route exact path="/" component={Home} />
-          <Route path="/login" component={Login} />
-          <Route path="/register" component={Register} />
-        </Container>
-      </ApolloProvider>
-    </Router>
+          <Container>
+            <Route exact path="/" component={Home} />
+            <Route path="/login" component={Login} />
+            <Route path="/register" component={Register} />
+          </Container>
+        </ApolloProvider>
+      </Router>
+    </Provider>
   );
 }
 

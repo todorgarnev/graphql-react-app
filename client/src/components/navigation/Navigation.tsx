@@ -1,9 +1,12 @@
 import React, { FunctionComponent, useState } from "react";
-import { NavLink, Redirect } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 import Auth from "../../common/utils/auth";
-import styles from "./Menu.module.scss";
+import { Store } from "../../store/types";
+import styles from "./Navigation.module.scss";
 
-const Menu: FunctionComponent = () => {
+const Navigation: FunctionComponent = () => {
+  const user = useSelector((state: Store) => state.user);
   const [isTokenSet, setIsTokenSet] = useState<boolean>(Auth.isTokenSet());
 
   const logout = (): void => {
@@ -12,8 +15,8 @@ const Menu: FunctionComponent = () => {
   }
 
   return (
-    <div className={styles.menu}>
-      <ul className={styles.listItems}>
+    <div className={styles.navigation}>
+      <ul className={styles.navigationItems}>
         <li><NavLink exact to="/" activeClassName={styles.active}>Home</NavLink></li>
         {
           isTokenSet ?
@@ -28,4 +31,4 @@ const Menu: FunctionComponent = () => {
   );
 }
 
-export default Menu;
+export default Navigation;

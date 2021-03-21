@@ -1,4 +1,5 @@
 import React, { FunctionComponent, FormEvent, useState, ChangeEvent } from "react";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { UserPlus } from 'react-feather';
@@ -11,10 +12,12 @@ import Utils from "../../common/utils/utils";
 import Errors from "../../components/errors/Errors";
 import Loader from "../../components/loader/Loader";
 import Auth from "../../common/utils/auth";
+import { addUser } from "../../store/actions";
 import styles from "./Register.module.scss";
 
 const Register: FunctionComponent = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
   const [errors, setErrors] = useState<IServerError>({});
   const [formValue, setFormValue] = useState<IRegister>({
     username: "",
@@ -22,12 +25,14 @@ const Register: FunctionComponent = () => {
     password: "",
     confirmPassword: ""
   });
-  const [addUser, { loading }] = useMutation<IRegisterResponse, IRegister>(REGISTER_USER, {
+  const [registerUser, { loading }] = useMutation<IRegisterResponse, IRegister>(REGISTER_USER, {
     update(proxy, userData) {
       console.log(userData);
       if (userData.data) {
         const token: string = userData.data.register.token;
+
         Auth.setToken(token);
+        dispatch(addUser(userData.data.register));
         history.push("/");
       }
       history.push("/");
@@ -42,7 +47,7 @@ const Register: FunctionComponent = () => {
 
   const onSubmit = (event: FormEvent): void => {
     event.preventDefault();
-    addUser();
+    registerUser();
   }
 
   const onChange = (event: ChangeEvent<HTMLInputElement>): void => {

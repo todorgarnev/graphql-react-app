@@ -1,4 +1,5 @@
 import React, { FunctionComponent, FormEvent, useState, ChangeEvent } from "react";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { LogIn } from 'react-feather';
@@ -11,17 +12,22 @@ import Utils from "../../common/utils/utils";
 import Errors from "../../components/errors/Errors";
 import Loader from "../../components/loader/Loader";
 import Auth from "../../common/utils/auth";
+import { addUser } from "../../store/actions";
+import { Store } from "../../store/types";
 import styles from "./Login.module.scss";
 
 const Login: FunctionComponent = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
   const [errors, setErrors] = useState<IServerError>({});
   const [formValue, setFormValue] = useState<ILogin>({ username: "", password: "" });
   const [loginUser, { loading }] = useMutation<ILoginResponse, ILogin>(LOGIN_USER, {
     update(proxy, userData) {
       if (userData.data) {
         const token: string = userData.data.login.token;
+
         Auth.setToken(token);
+        dispatch(addUser(userData.data.login));
         history.push("/");
       }
     },
