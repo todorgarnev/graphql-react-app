@@ -9,6 +9,12 @@ export interface INewPostResponse {
     createdAt: string;
     username: string;
     likesCount: number;
-    commentCount: number;
+    commentsCount: number;
+    comments: {
+      id: string;
+      username: string;
+      createdAt: string;
+      body: string;
+    };
   }
 }

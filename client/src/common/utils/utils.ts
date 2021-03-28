@@ -4,6 +4,6 @@ export default class Utils {
   }
 
   public static isNotNull = (val: any): boolean => {
-    return val !== undefined && val !== null;
+    return val !== undefined && val !== null && val !== "";
   }
 }

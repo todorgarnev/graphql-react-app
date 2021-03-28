@@ -4,12 +4,11 @@ import styles from "./Button.module.scss";
 interface ButtonProps {
   type: 'submit' | 'reset' | 'button';
   title: string;
-  disabled?: boolean;
 }
 
-const Button: FunctionComponent<ButtonProps> = ({ type, title, disabled = false, children }) => {
+const Button: FunctionComponent<ButtonProps> = ({ type, title, children }) => {
   return (
-    <button type={type} className={styles.button} disabled={disabled}>
+    <button type={type} className={styles.button}>
       <span className={styles.icon}>{children}</span>
       {title}
     </button>

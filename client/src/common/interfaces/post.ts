@@ -13,6 +13,6 @@ export interface IPost {
   };
 }
 
-export interface IPostsData {
+export interface IPostsResponse {
   getPosts: IPost[];
 }

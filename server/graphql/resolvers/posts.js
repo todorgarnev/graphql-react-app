@@ -31,7 +31,9 @@ module.exports = {
       const user = checkAuth(context);
 
       if (body.trim() === "") {
-        throw new Error("Post body must not be empty");
+        throw new UserInputError("Empty post", {
+          error: "Message must not be empty"
+        });
       }
 
       const newPost = new Post({
@@ -83,7 +85,7 @@ module.exports = {
         await post.save();
         return post;
       } else {
-        throw UserInputError("Post not found");
+        throw new UserInputError("Post not found");
       }
     }
   },
