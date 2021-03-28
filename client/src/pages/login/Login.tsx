@@ -47,14 +47,14 @@ const Login: FunctionComponent = () => {
   const onSubmit = (event: FormEvent): void => {
     event.preventDefault();
     loginUser();
-  }
+  };
 
   const onChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setFormValue({
       ...formValue,
       [event.target.name]: event.target.value
     });
-  }
+  };
 
   return (
     <div className={styles.login}>

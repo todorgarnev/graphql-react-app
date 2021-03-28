@@ -54,14 +54,14 @@ const Register: FunctionComponent = () => {
   const onSubmit = (event: FormEvent): void => {
     event.preventDefault();
     registerUser();
-  }
+  };
 
   const onChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setFormValue({
       ...formValue,
       [event.target.name]: event.target.value
     });
-  }
+  };
 
   return (
     <div className={styles.register}>
