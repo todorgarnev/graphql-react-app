@@ -14,14 +14,20 @@ module.exports = {
         throw new UserInputError("Errors", { errors });
       }
 
-      const user = await User.findOne({ username });
+      const user = await User.findOne({ $or: [{ username }, { email }] });
 
       if (user) {
-        throw new UserInputError("Username is taken", {
-          errors: {
-            username: "This username is taken"
-          }
-        });
+        const errors = {};
+
+        if (user.username === username) {
+          errors.username = "This username is taken";
+        }
+
+        if (user.email === email) {
+          errors.email = "This email is taken";
+        }
+
+        throw new UserInputError("Registration errors", { errors });
       }
 
       const hashedPassword = await bcrypt.hash(password, 12);

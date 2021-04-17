@@ -37,7 +37,6 @@ const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
   cache: new InMemoryCache()
 });
 
-
 function App() {
   return (
     <Provider store={store}>

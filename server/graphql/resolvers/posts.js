@@ -47,7 +47,6 @@ module.exports = {
       context.pubsub.publish("NEW_POST", {
         newPost: post
       });
-
       return post;
     },
     async deletePost(_, { postId }, context) {

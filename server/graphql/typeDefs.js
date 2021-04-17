@@ -7,6 +7,12 @@ module.exports = gql`
     token: String!
     username: String!
     createdAt: String!
+    months: [Month]!
+  }
+  type Month {
+    year: Int!
+    month: Int!
+    paid: Boolean!
   }
   type Post {
     id: ID!
