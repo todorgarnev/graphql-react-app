@@ -17,14 +17,11 @@ const Home: FunctionComponent = () => {
 
   return (
     <>
-      {
-        Utils.isNotNull(user) && <AddPost />
-      }
+      {Utils.isNotNull(user) && <AddPost />}
       {
         loading ? <Loader /> :
-          Utils.isArrayNotEmpty(posts) && posts.map((post: IPost, index: number) => (
-            <Post key={index} post={post} />
-          ))
+          Utils.isArrayNotEmpty(posts) ? posts.map((post: IPost, index: number) => <Post key={index} post={post} />) :
+            <div className={styles.noPosts}>No posts</div>
       }
     </>
   );

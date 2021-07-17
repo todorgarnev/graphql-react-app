@@ -1,8 +1,8 @@
 import React, { FunctionComponent } from "react";
-import { IPost } from "../../common/interfaces/post";
 import { ThumbsUp, MessageSquare, User } from 'react-feather';
+import { format } from "date-fns";
+import { IPost } from "../../common/interfaces/post";
 import styles from "./Post.module.scss";
-import moment from "moment";
 
 interface PostProps {
   post: IPost;
@@ -13,8 +13,9 @@ const Post: FunctionComponent<PostProps> = ({ post }) => {
     <div className={styles.post}>
       <div className={styles.header}>
         <span className={styles.date}>
-          {`${moment(post.createdAt).format("DD.MM.YY")}  ${moment(post.createdAt).format("HH:mm")}`}
+          {format(new Date(post.createdAt), "dd.MM.yy HH:mm")}
         </span>
+
         <span className={styles.likes}>
           <ThumbsUp size={15} className={styles.likeIcon} /> {post.likesCount}
         </span>
