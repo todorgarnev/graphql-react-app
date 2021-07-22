@@ -1,5 +1,3 @@
-# Graphql and React/Redux
-
 ## Client side
 
 ### Running The App locally
