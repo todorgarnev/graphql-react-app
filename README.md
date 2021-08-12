@@ -1,4 +1,4 @@
-# Graphql and React/Redux
+# GraphQL and React/Redux
 
 
 ### Content
